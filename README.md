@@ -1,4 +1,4 @@
-# Project 2 — RAG Chatbot on Kubernetes
+# Project — RAG Chatbot on Kubernetes
 
 A full-stack Retrieval-Augmented Generation (RAG) chatbot deployed on a local Kubernetes cluster using kind. Upload a PDF, ask questions about it, and get answers powered by Gemini — all routed through a real Kubernetes Ingress with multiple services talking to each other inside the cluster.
 

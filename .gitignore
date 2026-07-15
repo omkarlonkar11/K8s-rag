@@ -1,0 +1,21 @@
+# Secrets - NEVER commit these
+k8s/secret.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Docker
+*.tar
+
+# OS
+.DS_Store
+Thumbs.db

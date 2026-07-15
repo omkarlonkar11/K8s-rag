@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rag-config
+  namespace: rag
+data:
+  QDRANT_HOST: "qdrant-svc"
+  QDRANT_PORT: "6333"

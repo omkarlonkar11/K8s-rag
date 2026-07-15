@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-backend
+  namespace: rag
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rag-backend
+  template:
+    metadata:
+      labels:
+        app: rag-backend
+    spec:
+      containers:
+        - name: rag-backend
+          image: rag-backend:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rag-secrets
+                  key: GEMINI_API_KEY
+            - name: QDRANT_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: rag-config
+                  key: QDRANT_HOST
+            - name: QDRANT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rag-config
+                  key: QDRANT_PORT
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
